@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="common">
+	<typeAlias alias="codeBean" type="com.iteyes.sr.common.bean.CodeBean"/>
+	
+	<resultMap class="codeBean" id="codeBeans">
+		<result property="sCd" column="CD_S" />
+		<result property="cdNm" column="CD_NM" />
+	</resultMap>
+	
+	<!-- 공통코드 목록 취득 -->
+	<select id="getCode" parameterClass="String" resultMap="codeBeans">
+		SELECT CD_S, CD_NM
+		FROM common_code
+		WHERE CD_L = #lCd#
+		ORDER BY CD_SORT
+	</select>
+	
+	<select id="getCodeCount" parameterClass="String" resultClass="Integer">
+		SELECT COUNT(*) AS CNT
+		FROM COMMON_CODE
+		WHERE CD_L = #lCd#
+	</select>
+	
+</sqlMap>
+
+
+
+
